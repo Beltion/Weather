@@ -9,7 +9,7 @@ data class CityWeather(
         val id: Int,
         val name: String,
         val coordinate: Coordinate, //  latitude and longitude of the city
-        val weather: Weather, //    More info Weather condition codes
+        val weather: ArrayList<Weather>, //    More info Weather condition codes
         val main: MainWeatherData,
         val wind: Wind,
         val snow: Snow,

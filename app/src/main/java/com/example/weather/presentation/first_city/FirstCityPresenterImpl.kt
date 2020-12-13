@@ -1,6 +1,9 @@
 package com.example.weather.presentation.first_city
 
 import android.util.Log
+import com.example.core.business.callbacks.FailureCallback
+import com.example.core.business.callbacks.SuccessCallback
+import com.example.core.business.entities.CityWeather
 import com.example.weather.business.FirstCityPresenter
 import com.example.weather.business.FirstCityView
 import java.lang.ref.WeakReference
@@ -18,6 +21,22 @@ class FirstCityPresenterImpl : FirstCityPresenter {
     override fun onBtnClick(cityTitle: String) {
         if (cityTitle.isNotBlank() || cityTitle.isNotEmpty()){
             Log.d(TAG, "btnClick city title -> $cityTitle")
+
+            model.getWeather(cityTitle,object : SuccessCallback{
+                override fun onSuccess(data: Any?) {
+                    if (data is CityWeather){
+                        Log.d(TAG, data.toString())
+                    } else {
+                        Log.e(TAG, data.toString())
+                    }
+                }
+            },  object : FailureCallback{
+                override fun onFailure(tag: String, error: Any?) {
+                    Log.d("$TAG -> $tag", error.toString())
+                }
+
+            })
+
         }
 
     }

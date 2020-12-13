@@ -5,9 +5,11 @@ import com.example.core.business.callbacks.SuccessCallback
 import com.example.core.data.WeatherRepository
 
 class GetWeatherToday(private val repository: WeatherRepository) {
-    suspend fun getWeather(successCallback: SuccessCallback,
+    suspend fun getWeather(city: String,
+                           successCallback: SuccessCallback,
                            failureCallback: FailureCallback){
         repository.getWeatherToday(
+            city,
             object : SuccessCallback{
                 override fun onSuccess(data: Any?) {
                     successCallback.onSuccess(data)

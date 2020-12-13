@@ -56,6 +56,7 @@ class FirstCityActivity :
 
     override fun initLogicItems() {
         presenter.initView(this)
+        cityEt.setText("Ростов")
         cityBtn.setOnClickListener {
             presenter.onBtnClick(
                     cityEt.text.toString()

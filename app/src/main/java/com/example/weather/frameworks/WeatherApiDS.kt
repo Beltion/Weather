@@ -1,10 +1,13 @@
 package com.example.weather.frameworks
 
+import android.util.Log
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
 import com.example.core.business.entities.CityWeather
 import com.example.core.data.WeatherDataSource
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -15,13 +18,32 @@ class WeatherApiDS : WeatherDataSource {
     private val TAG = WeatherApiDS::class.simpleName
 
     override suspend fun getWeatherToday(
+        city: String,
         successCallback: SuccessCallback,
-        failureCallback: FailureCallback,
-        city: String
+        failureCallback: FailureCallback
     ) {
         try {
             val common = Common.retrofitService
-            common.getOneDayWeather(city)
+            common.getOneDayWeather(city).enqueue(object : Callback<CityWeather>{
+                override fun onFailure(call: Call<CityWeather>, t: Throwable) {
+                    t.printStackTrace()
+                    failureCallback.onFailure("$TAG Callback onFailure-> ", t.message)
+                }
+
+                override fun onResponse(call: Call<CityWeather>, response: Response<CityWeather>) {
+                    if (response.isSuccessful){
+                        successCallback.onSuccess(response.body())
+                    } else {
+                        try {
+                            failureCallback.onFailure("$TAG errorBody-> ", response.errorBody())
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            failureCallback.onFailure("$TAG errorBody exception-> ", e.message)
+                        }
+                    }
+                }
+
+            })
         } catch (e: Exception){
             e.printStackTrace()
             failureCallback.onFailure("$TAG -> ", e.message)
@@ -29,10 +51,10 @@ class WeatherApiDS : WeatherDataSource {
     }
 
     override suspend fun getWeatherForWeek(
-        successCallback: SuccessCallback,
-        failureCallback: FailureCallback,
         lat: Float,
-        lon: Float
+        lon: Float,
+        successCallback: SuccessCallback,
+        failureCallback: FailureCallback
     ) {
         try {
 

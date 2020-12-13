@@ -13,12 +13,13 @@ data class Coordinate(
         val Lat: String
 )
 
+
 data class MainWeatherData(
-        val temp: Int,
-        val feels_like: Int,
-        val temp_min: Int,
-        val temp_max: Int,
-        val pressure: Int,
+        val temp: Float,
+        val feels_like: Float,
+        val temp_min: Float,
+        val temp_max: Float,
+        val pressure: Float,
         val humidity: Int
 )
 
