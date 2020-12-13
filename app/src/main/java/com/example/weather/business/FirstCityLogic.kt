@@ -13,4 +13,5 @@ interface FirstCityPresenter : BasePresenter {
 interface FirstCityView : BaseView {
     fun getCityName() : String
     fun getStringFromID(stringID: Int) : String
+    fun showToast(str: String)
 }

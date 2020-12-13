@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.weather.R
@@ -39,6 +40,10 @@ class FirstCityActivity :
 
     override fun getStringFromID(stringID: Int): String =
             getString(stringID)
+
+    override fun showToast(str: String) {
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+    }
 
     override fun initViewItems() {
         progress = findViewById(R.id.progressbar)
