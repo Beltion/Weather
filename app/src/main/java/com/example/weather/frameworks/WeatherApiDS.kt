@@ -1,9 +1,8 @@
 package com.example.weather.frameworks
 
-import android.util.Log
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
-import com.example.core.business.entities.CityWeather
+import com.example.weather.data.entities.CityWeather
 import com.example.core.data.WeatherDataSource
 import retrofit2.Call
 import retrofit2.Callback

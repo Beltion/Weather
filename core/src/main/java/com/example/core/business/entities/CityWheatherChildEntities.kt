@@ -1,16 +1,11 @@
 package com.example.core.business.entities
-
 data class Clouds(
         val all: Int
 )
 
-data class Snow(
-        val atHour: Float
-)
-
 data class Coordinate(
         val lon: String,
-        val Lat: String
+        val lat: String
 )
 
 

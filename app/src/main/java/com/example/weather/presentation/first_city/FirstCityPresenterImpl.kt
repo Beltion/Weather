@@ -3,7 +3,7 @@ package com.example.weather.presentation.first_city
 import android.util.Log
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
-import com.example.core.business.entities.CityWeather
+import com.example.weather.data.entities.CityWeather
 import com.example.weather.business.FirstCityPresenter
 import com.example.weather.business.FirstCityView
 import java.lang.ref.WeakReference
