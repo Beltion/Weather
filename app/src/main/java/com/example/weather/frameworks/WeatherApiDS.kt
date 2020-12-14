@@ -38,7 +38,10 @@ class WeatherApiDS : WeatherDataSource {
                         successCallback.onSuccess(response.body())
                     } else {
                         try {
-                            val error = Gson().fromJson(response.errorBody().toString(), WeatherErrorBody::class.java)
+                            val error: WeatherErrorBody =
+                                    Gson().fromJson(
+                                            response.errorBody()!!.string(),
+                                            WeatherErrorBody::class.java)
                             failureCallback.onFailure("$TAG errorBody-> ", error)
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -50,7 +53,7 @@ class WeatherApiDS : WeatherDataSource {
             })
         } catch (e: Exception){
             e.printStackTrace()
-            failureCallback.onFailure("$TAG -> ", e.message)
+            failureCallback.onFailure("$TAG -> ", e)
         }
     }
 
@@ -64,7 +67,7 @@ class WeatherApiDS : WeatherDataSource {
 
         } catch (e: Exception){
             e.printStackTrace()
-            failureCallback.onFailure("$TAG -> ", e.message)
+            failureCallback.onFailure("$TAG -> ", e)
         }
     }
 
