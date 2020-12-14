@@ -2,8 +2,11 @@ package com.example.weather.frameworks
 
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
+import com.example.core.business.entities.WeatherErrorBody
 import com.example.weather.data.entities.CityWeather
 import com.example.core.data.WeatherDataSource
+import com.google.gson.Gson
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+//  Get weather from api and check status code
 class WeatherApiDS : WeatherDataSource {
 
     private val TAG = WeatherApiDS::class.simpleName
@@ -26,7 +30,7 @@ class WeatherApiDS : WeatherDataSource {
             common.getOneDayWeather(city).enqueue(object : Callback<CityWeather>{
                 override fun onFailure(call: Call<CityWeather>, t: Throwable) {
                     t.printStackTrace()
-                    failureCallback.onFailure("$TAG Callback onFailure-> ", t.message)
+                    failureCallback.onFailure("$TAG Callback onFailure-> ", t)
                 }
 
                 override fun onResponse(call: Call<CityWeather>, response: Response<CityWeather>) {
@@ -34,10 +38,11 @@ class WeatherApiDS : WeatherDataSource {
                         successCallback.onSuccess(response.body())
                     } else {
                         try {
-                            failureCallback.onFailure("$TAG errorBody-> ", response.errorBody())
+                            val error = Gson().fromJson(response.errorBody().toString(), WeatherErrorBody::class.java)
+                            failureCallback.onFailure("$TAG errorBody-> ", error)
                         } catch (e: Exception) {
                             e.printStackTrace()
-                            failureCallback.onFailure("$TAG errorBody exception-> ", e.message)
+                            failureCallback.onFailure("$TAG errorBody exception-> ", e)
                         }
                     }
                 }

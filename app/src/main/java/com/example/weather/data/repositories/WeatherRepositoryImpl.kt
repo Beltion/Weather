@@ -3,6 +3,7 @@ package com.example.weather.data.repositories
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
 import com.example.core.data.WeatherRepository
+import com.example.weather.data.entities.CityWeather
 import com.example.weather.frameworks.WeatherApiDS
 
 class WeatherRepositoryImpl : WeatherRepository {
@@ -19,7 +20,11 @@ class WeatherRepositoryImpl : WeatherRepository {
             apiDS.getWeatherToday(city,
             object : SuccessCallback{
                 override fun onSuccess(data: Any?) {
-                    successCallback.onSuccess(data)
+                    if (data != null){
+                        successCallback.onSuccess(data)
+                    } else {
+                        failureCallback.onFailure("$TAG -> ", "data is null")
+                    }
                 }
 
             },  object :FailureCallback{
@@ -29,7 +34,7 @@ class WeatherRepositoryImpl : WeatherRepository {
 
                 })
         } catch (e: Exception){
-            failureCallback.onFailure("$TAG ->1 ", e)
+            failureCallback.onFailure("$TAG -> ", e)
         }
     }
 
