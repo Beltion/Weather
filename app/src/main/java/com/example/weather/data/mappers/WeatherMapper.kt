@@ -7,7 +7,7 @@ import com.example.weather.data.entities.CityWeatherParcelable
 import com.example.weather.data.entities.parcelable.*
 
 class WeatherMapper {
-    fun jsonCityWeatherToParcelable(cityWeather: CityWeather)
+    fun cityWeatherToParcelable(cityWeather: CityWeather)
             = CityWeatherParcelable(
             cityWeather.cod,
             cityWeather.base,
@@ -34,7 +34,9 @@ class WeatherMapper {
                     cityWeather.wind.deg
             ),
             SnowParcelable(
-                   cityWeather.snow.atHour
+                   cityWeather.let{
+                       it.snow.atHour
+                   } ?: 0.0f // <- set 0 if weather haven't snow
             ),
             CloudsParcelable(
                     cityWeather.clouds.all
