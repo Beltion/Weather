@@ -6,6 +6,7 @@ import com.example.core.business.callbacks.SuccessCallback
 import com.example.weather.data.entities.CityWeather
 import com.example.weather.business.FirstCityPresenter
 import com.example.weather.business.FirstCityView
+import com.example.weather.data.mappers.WeatherMapper
 import java.lang.ref.WeakReference
 
 class FirstCityPresenterImpl : FirstCityPresenter {
@@ -26,6 +27,15 @@ class FirstCityPresenterImpl : FirstCityPresenter {
                 override fun onSuccess(data: Any?) {
                     if (data is CityWeather){
                         Log.d(TAG, data.toString())
+                        try {
+                            view?.get()?.startNewActivity(
+                                    WeatherMapper().cityWeatherToParcelable(data)
+                            )
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            Log.e(TAG, "to Parcelable error -> ${e.message}")
+                        }
+
                     } else {
                         Log.e(TAG, data.toString())
                     }
