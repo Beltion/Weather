@@ -1,6 +1,5 @@
 package com.example.weather.data.mappers
 
-import android.os.Parcel
 import com.example.core.business.entities.Weather
 import com.example.weather.data.entities.CityWeather
 import com.example.weather.data.entities.CityWeatherParcelable
@@ -34,9 +33,7 @@ class WeatherMapper {
                     cityWeather.wind.deg
             ),
             SnowParcelable(
-                   cityWeather.let{
-                       it.snow.atHour
-                   } ?: 0.0f // <- set 0 if weather haven't snow
+                   cityWeather.snow?.atHour ?: 0.0f // <- set 0 if weather haven't snow
             ),
             CloudsParcelable(
                     cityWeather.clouds.all
