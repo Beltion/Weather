@@ -2,6 +2,7 @@ package com.example.weather.business
 
 import com.example.core.business.BasePresenter
 import com.example.core.business.BaseView
+import com.example.weather.data.entities.CityWeatherParcelable
 
 // This Activity calls when app first start or User city.count == 0
 
@@ -14,4 +15,5 @@ interface FirstCityView : BaseView {
     fun getCityName() : String
     fun getStringFromID(stringID: Int) : String
     fun showToast(str: String)
+    fun startNewActivity(weatherParcelable: CityWeatherParcelable)
 }

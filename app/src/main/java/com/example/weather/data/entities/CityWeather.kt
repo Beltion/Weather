@@ -17,7 +17,7 @@ data class CityWeather(
         val weather: ArrayList<Weather>, //    More info Weather condition codes
         val main: MainWeatherData,
         val wind: Wind,
-        val snow: Snow, //   <- have SerializedName annotation
+        val snow: Snow?, //   <- have SerializedName annotation
         val clouds: Clouds,
         val sys: SystemCityData
 )
