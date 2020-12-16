@@ -1,5 +1,6 @@
 package com.example.weather.presentation.first_city
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -10,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.weather.R
 import com.example.weather.business.FirstCityView
+import com.example.weather.data.entities.CityWeatherParcelable
+import com.example.weather.data.entities.parcelable.WeatherParcelable
+import com.example.weather.presentation.city_list.CityListActivity
 
 class FirstCityActivity :
     AppCompatActivity(),
@@ -43,6 +47,12 @@ class FirstCityActivity :
 
     override fun showToast(str: String) {
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun startNewActivity(weatherParcelable: CityWeatherParcelable) {
+        val intent = Intent(this, CityListActivity::class.java)
+        intent.putExtra("weatherToday", weatherParcelable)
+        startActivity(intent)
     }
 
     override fun initViewItems() {
