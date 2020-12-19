@@ -53,6 +53,7 @@ class FirstCityActivity :
         val intent = Intent(this, CityListActivity::class.java)
         intent.putExtra("weatherToday", weatherParcelable)
         startActivity(intent)
+        finish()
     }
 
     override fun initViewItems() {

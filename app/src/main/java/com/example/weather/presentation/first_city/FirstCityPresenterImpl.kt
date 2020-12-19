@@ -22,30 +22,32 @@ class FirstCityPresenterImpl : FirstCityPresenter {
     override fun onBtnClick(cityTitle: String) {
         if (cityTitle.isNotBlank() || cityTitle.isNotEmpty()){
             Log.d(TAG, "btnClick city title -> $cityTitle")
+            view?.get()?.let{view ->
+                model.getWeather(cityTitle,object : SuccessCallback{
+                    override fun onSuccess(data: Any?) {
+                        if (data is CityWeather){
+                            Log.d(TAG, data.toString())
+                            try {
+                                view.startNewActivity(
+                                        WeatherMapper().cityWeatherToParcelable(data)
+                                )
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                Log.e(TAG, "to Parcelable error -> ${e.message}")
+                            }
 
-            model.getWeather(cityTitle,object : SuccessCallback{
-                override fun onSuccess(data: Any?) {
-                    if (data is CityWeather){
-                        Log.d(TAG, data.toString())
-                        try {
-                            view?.get()?.startNewActivity(
-                                    WeatherMapper().cityWeatherToParcelable(data)
-                            )
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            Log.e(TAG, "to Parcelable error -> ${e.message}")
+                        } else {
+                            Log.e(TAG, data.toString())
                         }
-
-                    } else {
-                        Log.e(TAG, data.toString())
                     }
-                }
-            },  object : FailureCallback{
-                override fun onFailure(tag: String, error: Any?) {
-                    Log.d("$TAG -> $tag", error.toString())
-                }
+                },  object : FailureCallback{
+                    override fun onFailure(tag: String, error: Any?) {
+                        Log.d("$TAG -> $tag", error.toString())
+                    }
 
-            })
+                })
+
+            }
 
         }
 

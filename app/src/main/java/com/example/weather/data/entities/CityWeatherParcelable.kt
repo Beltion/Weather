@@ -2,9 +2,7 @@ package com.example.weather.data.entities
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.example.core.business.entities.*
 import com.example.weather.data.entities.parcelable.*
-import java.util.HashMap
 
 data class CityWeatherParcelable(
         val cod: Int,
