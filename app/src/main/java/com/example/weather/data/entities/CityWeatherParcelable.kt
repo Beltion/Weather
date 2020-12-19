@@ -19,6 +19,7 @@ data class CityWeatherParcelable(
         val main: MainWeatherDataParcelable?,
         val wind: WindParcelable?,
         val snow: SnowParcelable?, //   <- have SerializedName annotation
+        val rain: RainParcelable?, //   <- have SerializedName annotation
         val clouds: CloudsParcelable?,
         val sys: SystemCityDataParcelable?
 ) : Parcelable {
@@ -37,6 +38,7 @@ data class CityWeatherParcelable(
             parcel.readParcelable<MainWeatherDataParcelable>(MainWeatherDataParcelable::class.java.classLoader),
             parcel.readParcelable<WindParcelable>(WindParcelable::class.java.classLoader),
             parcel.readParcelable<SnowParcelable>(SnowParcelable::class.java.classLoader),
+            parcel.readParcelable<RainParcelable>(RainParcelable::class.java.classLoader),
             parcel.readParcelable<CloudsParcelable>(CloudsParcelable::class.java.classLoader),
             parcel.readParcelable<SystemCityDataParcelable>(SystemCityDataParcelable::class.java.classLoader)) {
     }

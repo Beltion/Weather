@@ -4,7 +4,6 @@ import com.example.core.business.entities.*
 
 // GSON parse  weather entity for Retrofit
 // Should be in core but because child class have SerializedName can't be there
-
 data class CityWeather(
         val cod: Int,
         val base: String,
@@ -18,6 +17,7 @@ data class CityWeather(
         val main: MainWeatherData,
         val wind: Wind,
         val snow: Snow?, //   <- have SerializedName annotation
+        val rain: Rain?, //   <- have SerializedName annotation
         val clouds: Clouds,
         val sys: SystemCityData
 )

@@ -35,6 +35,9 @@ class WeatherMapper {
             SnowParcelable(
                    cityWeather.snow?.atHour ?: 0.0f // <- set 0 if weather haven't snow
             ),
+            RainParcelable(
+                    cityWeather.rain?.atHour ?: 0.0f // <- set 0 if weather haven't snow
+            ),
             CloudsParcelable(
                     cityWeather.clouds.all
             ),

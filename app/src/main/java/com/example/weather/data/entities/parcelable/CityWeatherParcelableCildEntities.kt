@@ -162,6 +162,32 @@ data class SnowParcelable(
     }
 }
 
+
+data class RainParcelable(
+        val atHour: Float
+) : Parcelable {
+    constructor(parcel: Parcel) : this(parcel.readFloat()) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeFloat(atHour)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<SnowParcelable> {
+        override fun createFromParcel(parcel: Parcel): SnowParcelable {
+            return SnowParcelable(parcel)
+        }
+
+        override fun newArray(size: Int): Array<SnowParcelable?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
+
 data class WeatherParcelable(
         val id: Int,
         val main: String?,
@@ -198,16 +224,16 @@ data class WeatherParcelable(
 }
 
 data class WindParcelable(
-        val speed: Int,
+        val speed: Float,
         val deg: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readInt(),
+            parcel.readFloat(),
             parcel.readInt()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(speed)
+        parcel.writeFloat(speed)
         parcel.writeInt(deg)
     }
 
