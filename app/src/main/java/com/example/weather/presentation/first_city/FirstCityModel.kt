@@ -2,8 +2,8 @@ package com.example.weather.presentation.first_city
 
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
-import com.example.core.use_case.GetWeatherToday
-import com.example.weather.data.repositories.WeatherRepositoryImpl
+import com.example.core.use_case.city.GetCityWeatherToday
+import com.example.weather.data.repositories.CityWeatherRepositoryApiImpl
 import kotlinx.coroutines.*
 
 class FirstCityModel {
@@ -13,7 +13,9 @@ class FirstCityModel {
     fun getWeather(city: String,
                    successCallback: SuccessCallback,
                    failureCallback: FailureCallback) = scope.launch {
-        val getWeatherToday = GetWeatherToday(WeatherRepositoryImpl())
+        val getWeatherToday = GetCityWeatherToday(
+            CityWeatherRepositoryApiImpl()
+        )
         getWeatherToday.getWeather(city,
             object : SuccessCallback{
                 override fun onSuccess(data: Any?) {

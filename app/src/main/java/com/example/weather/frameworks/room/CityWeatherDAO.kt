@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.weather.data.entities.room.CityWeather
+import com.example.core.business.entities.CityWeather
 
 @Dao
 interface CityWeatherDAO {

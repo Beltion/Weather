@@ -4,7 +4,7 @@ import com.example.core.business.entities.Weather
 import com.example.weather.data.entities.json.CityWeatherRetrofit
 import com.example.weather.data.entities.parcelable.CityWeatherParcelable
 import com.example.weather.data.entities.parcelable.*
-import com.example.weather.data.entities.room.CityWeather
+import com.example.core.business.entities.CityWeather
 
 class WeatherMapper {
     fun cityWeatherToParcelable(cityWeatherRetrofit: CityWeatherRetrofit)

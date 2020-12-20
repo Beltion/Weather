@@ -4,7 +4,7 @@ import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
 import com.example.core.business.entities.WeatherErrorBody
 import com.example.weather.data.entities.json.CityWeatherRetrofit
-import com.example.core.data.WeatherDataSource
+import com.example.core.data.city.CityWeatherDataSource
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,9 +15,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 //  Get weather from api and check status code
-class WeatherApiDS : WeatherDataSource {
+class CityWeatherApiDS : CityWeatherDataSource {
 
-    private val TAG = WeatherApiDS::class.simpleName
+    private val TAG = CityWeatherApiDS::class.simpleName
 
     override suspend fun getWeatherToday(
         city: String,

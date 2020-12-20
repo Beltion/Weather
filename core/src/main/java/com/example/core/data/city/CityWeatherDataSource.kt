@@ -1,9 +1,9 @@
-package com.example.core.data
+package com.example.core.data.city
 
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
 
-interface WeatherDataSource {
+interface CityWeatherDataSource {
     suspend fun getWeatherToday(city: String,
                                 successCallback: SuccessCallback,
                                 failureCallback: FailureCallback)

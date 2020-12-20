@@ -1,4 +1,4 @@
-package com.example.weather.data.entities.room
+package com.example.core.business.entities
 
 
 //  This Class used when app work with today weather Room

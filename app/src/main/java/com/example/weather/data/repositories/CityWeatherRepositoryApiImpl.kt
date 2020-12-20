@@ -2,13 +2,14 @@ package com.example.weather.data.repositories
 
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
-import com.example.core.data.WeatherRepository
-import com.example.weather.frameworks.WeatherApiDS
+import com.example.core.data.city.CityWeatherRepository
+import com.example.weather.frameworks.CityWeatherApiDS
 
-class WeatherRepositoryImpl : WeatherRepository {
+class CityWeatherRepositoryApiImpl :
+    CityWeatherRepository {
 
-    private val TAG = WeatherRepositoryImpl::class.simpleName
-    private val apiDS = WeatherApiDS()
+    private val TAG = CityWeatherRepositoryApiImpl::class.simpleName
+    private val apiDS = CityWeatherApiDS()
 
     override suspend fun getWeatherToday(
         city: String,

@@ -1,4 +1,7 @@
 package com.example.core.business.entities
+
+//  This entities used in CityWeatherRetrofit for JSON parse
+
 data class Clouds(
         val all: Int
 )
