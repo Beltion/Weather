@@ -51,7 +51,7 @@ class FirstCityActivity :
 
     override fun startNewActivity(weatherParcelable: CityWeatherParcelable) {
         val intent = Intent(this, CityListActivity::class.java)
-        intent.putExtra("weatherToday", weatherParcelable)
+        intent.putExtra("firstCityWeather", weatherParcelable)
         startActivity(intent)
         finish()
     }
