@@ -1,4 +1,4 @@
-package com.example.weather.data.entities.room
+package com.example.weather.frameworks.room.table
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
