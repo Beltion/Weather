@@ -21,6 +21,8 @@ class CityListPresenterImpl : CityListPresenter {
     }
 
     override fun onViewCreated() {
-        TODO("Not yet implemented")
+        view?.get()?.let{view ->
+            view.showContent()
+        }
     }
 }

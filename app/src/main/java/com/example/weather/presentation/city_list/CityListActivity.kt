@@ -1,51 +1,90 @@
 package com.example.weather.presentation.city_list
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.weather.R
 import com.example.weather.business.CityListView
+import com.example.weather.data.entities.CityWeather
+import com.example.weather.data.entities.CityWeatherParcelable
+import com.example.weather.data.entities.parcelable.CoordinateParcelable
+import com.example.weather.presentation.first_city.FirstCityActivity
 
 class CityListActivity :
         AppCompatActivity(),
         CityListView
 {
 
+    private lateinit var rv: RecyclerView
+    private lateinit var container: ConstraintLayout
+    private lateinit var progress: ProgressBar
+
+    private var presenter = CityListPresenterImpl()
+
     override fun onStart() {
         super.onStart()
+        initLogicItems()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.city_list)
+        initViewItems()
     }
 
-    override fun initRV() {
+    override fun initRV(citiesWeather: ArrayList<CityWeather>?) {
         TODO("Not yet implemented")
     }
 
-    override fun getCityName(): String {
-        TODO("Not yet implemented")
-    }
-
-    override fun getStringFromID(stringID: Int): String {
-        TODO("Not yet implemented")
-    }
+    override fun getStringFromID(stringID: Int): String
+        = getString(stringID)
 
     override fun showToast(str: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun getCityWeatherParcelable(): CityWeatherParcelable? {
+        return intent.extras?.getParcelable("firstCityWeather")
+    }
+
+    override fun startForecastActivity(coordinate: CoordinateParcelable) {
+        val intent = Intent(this, CityListActivity::class.java)
+        intent.putExtra("coor", coordinate)
+        startActivity(intent)
+    }
+
+    override fun startFirstCityActivity() {
+        val intent = Intent(this, FirstCityActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun initViewItems() {
-        TODO("Not yet implemented")
+        progress = findViewById(R.id.progressbar)
+        container = findViewById(R.id.content_city_list)
+
+        rv = findViewById(R.id.rv_cities_city_list)
+        rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }
 
     override fun initLogicItems() {
-        TODO("Not yet implemented")
+        presenter.initView(this)
+        presenter.onViewCreated()
     }
 
     override fun showContent() {
-        TODO("Not yet implemented")
+        container.visibility = View.VISIBLE
+        progress.visibility = View.INVISIBLE
     }
 
     override fun hideContent() {
-        TODO("Not yet implemented")
+        container.visibility = View.INVISIBLE
+        progress.visibility = View.VISIBLE
     }
 }
