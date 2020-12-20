@@ -3,7 +3,7 @@ package com.example.weather.presentation.first_city
 import android.util.Log
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
-import com.example.weather.data.entities.CityWeather
+import com.example.weather.data.entities.json.CityWeatherRetrofit
 import com.example.weather.business.FirstCityPresenter
 import com.example.weather.business.FirstCityView
 import com.example.weather.data.mappers.WeatherMapper
@@ -25,7 +25,7 @@ class FirstCityPresenterImpl : FirstCityPresenter {
             view?.get()?.let{view ->
                 model.getWeather(cityTitle,object : SuccessCallback{
                     override fun onSuccess(data: Any?) {
-                        if (data is CityWeather){
+                        if (data is CityWeatherRetrofit){
                             Log.d(TAG, data.toString())
                             try {
                                 view.startNewActivity(

@@ -1,54 +1,56 @@
 package com.example.weather.data.mappers
 
 import com.example.core.business.entities.Weather
-import com.example.weather.data.entities.CityWeather
-import com.example.weather.data.entities.CityWeatherParcelable
+import com.example.weather.data.entities.json.CityWeatherRetrofit
+import com.example.weather.data.entities.parcelable.CityWeatherParcelable
 import com.example.weather.data.entities.parcelable.*
+import com.example.weather.data.entities.room.CityWeather
 
 class WeatherMapper {
-    fun cityWeatherToParcelable(cityWeather: CityWeather)
+    fun cityWeatherToParcelable(cityWeatherRetrofit: CityWeatherRetrofit)
             = CityWeatherParcelable(
-            cityWeather.cod,
-            cityWeather.base,
-            cityWeather.visibility,
-            cityWeather.dt,
-            cityWeather.timezone,
-            cityWeather.id,
-            cityWeather.name,
+            cityWeatherRetrofit.cod,
+            cityWeatherRetrofit.base,
+            cityWeatherRetrofit.visibility,
+            cityWeatherRetrofit.dt,
+            cityWeatherRetrofit.timezone,
+            cityWeatherRetrofit.id,
+            cityWeatherRetrofit.name,
             CoordinateParcelable(
-                    cityWeather.coord.lon,
-                    cityWeather.coord.lat
+                    cityWeatherRetrofit.coord.lon,
+                    cityWeatherRetrofit.coord.lat
             ),
-            weatherListToWeatherParcelableList(cityWeather.weather),
+            weatherListToWeatherParcelableList(cityWeatherRetrofit.weather),
             MainWeatherDataParcelable(
-                    cityWeather.main.temp,
-                    cityWeather.main.feels_like,
-                    cityWeather.main.temp_min,
-                    cityWeather.main.temp_max,
-                    cityWeather.main.pressure,
-                    cityWeather.main.humidity
+                    cityWeatherRetrofit.main.temp,
+                    cityWeatherRetrofit.main.feels_like,
+                    cityWeatherRetrofit.main.temp_min,
+                    cityWeatherRetrofit.main.temp_max,
+                    cityWeatherRetrofit.main.pressure,
+                    cityWeatherRetrofit.main.humidity
             ),
             WindParcelable(
-                    cityWeather.wind.speed,
-                    cityWeather.wind.deg
+                    cityWeatherRetrofit.wind.speed,
+                    cityWeatherRetrofit.wind.deg
             ),
             SnowParcelable(
-                   cityWeather.snow?.atHour ?: 0.0f // <- set 0 if weather haven't snow
+                    cityWeatherRetrofit.snow?.atHour ?: 0.0f // <- set 0 if weather haven't snow
             ),
             RainParcelable(
-                    cityWeather.rain?.atHour ?: 0.0f // <- set 0 if weather haven't snow
+                    cityWeatherRetrofit.rain?.atHour ?: 0.0f // <- set 0 if weather haven't snow
             ),
             CloudsParcelable(
-                    cityWeather.clouds.all
+                    cityWeatherRetrofit.clouds.all
             ),
             SystemCityDataParcelable(
-                    cityWeather.sys.type,
-                    cityWeather.sys.id,
-                    cityWeather.sys.country,
-                    cityWeather.sys.sunrise,
-                    cityWeather.sys.sunset
+                    cityWeatherRetrofit.sys.type,
+                    cityWeatherRetrofit.sys.id,
+                    cityWeatherRetrofit.sys.country,
+                    cityWeatherRetrofit.sys.sunrise,
+                    cityWeatherRetrofit.sys.sunset
             )
     )
+
 
     fun weatherListToWeatherParcelableList(list: ArrayList<Weather>): ArrayList<WeatherParcelable> {
         val parcelables = ArrayList<WeatherParcelable>()

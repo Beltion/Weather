@@ -1,8 +1,7 @@
-package com.example.weather.data.entities
+package com.example.weather.data.entities.parcelable
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.example.weather.data.entities.parcelable.*
 
 data class CityWeatherParcelable(
         val cod: Int,
@@ -64,7 +63,9 @@ data class CityWeatherParcelable(
 
     companion object CREATOR : Parcelable.Creator<CityWeatherParcelable> {
         override fun createFromParcel(parcel: Parcel): CityWeatherParcelable {
-            return CityWeatherParcelable(parcel)
+            return CityWeatherParcelable(
+                parcel
+            )
         }
 
         override fun newArray(size: Int): Array<CityWeatherParcelable?> {

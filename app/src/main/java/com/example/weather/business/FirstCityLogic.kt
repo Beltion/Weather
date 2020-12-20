@@ -2,7 +2,7 @@ package com.example.weather.business
 
 import com.example.core.business.BasePresenter
 import com.example.core.business.BaseView
-import com.example.weather.data.entities.CityWeatherParcelable
+import com.example.weather.data.entities.parcelable.CityWeatherParcelable
 
 // This Activity calls when app first start or User city.count == 0
 

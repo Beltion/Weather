@@ -3,10 +3,9 @@ package com.example.weather.frameworks
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
 import com.example.core.business.entities.WeatherErrorBody
-import com.example.weather.data.entities.CityWeather
+import com.example.weather.data.entities.json.CityWeatherRetrofit
 import com.example.core.data.WeatherDataSource
 import com.google.gson.Gson
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,13 +26,13 @@ class WeatherApiDS : WeatherDataSource {
     ) {
         try {
             val common = Common.retrofitService
-            common.getOneDayWeather(city).enqueue(object : Callback<CityWeather>{
-                override fun onFailure(call: Call<CityWeather>, t: Throwable) {
+            common.getOneDayWeather(city).enqueue(object : Callback<CityWeatherRetrofit>{
+                override fun onFailure(call: Call<CityWeatherRetrofit>, t: Throwable) {
                     t.printStackTrace()
                     failureCallback.onFailure("$TAG Callback onFailure-> ", t)
                 }
 
-                override fun onResponse(call: Call<CityWeather>, response: Response<CityWeather>) {
+                override fun onResponse(call: Call<CityWeatherRetrofit>, response: Response<CityWeatherRetrofit>) {
                     if (response.isSuccessful){
                         successCallback.onSuccess(response.body())
                     } else {
@@ -77,7 +76,7 @@ class WeatherApiDS : WeatherDataSource {
             @Query("q") city: String,
             @Query("lang") lang: String = "ru",
             @Query("appid") key: String = "51d4575d9c8e6d6decb5854c1db07ec7"
-        ) : Call<CityWeather>
+        ) : Call<CityWeatherRetrofit>
 
         @GET("onecall/timemachine?")
         fun getFiveDayWeather(
@@ -86,7 +85,7 @@ class WeatherApiDS : WeatherDataSource {
             @Query("dt") dt: String,
             @Query("lang") lang: String = "ru",
             @Query("appid") key: String = "51d4575d9c8e6d6decb5854c1db07ec7"
-        ) : Call<CityWeather>
+        ) : Call<CityWeatherRetrofit>
     }
 
     object RetrofitClient {

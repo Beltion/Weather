@@ -1,10 +1,10 @@
-package com.example.weather.data.entities
+package com.example.weather.data.entities.json
 
 import com.example.core.business.entities.*
 
 // GSON parse  weather entity for Retrofit
 // Should be in core but because child class have SerializedName can't be there
-data class CityWeather(
+data class CityWeatherRetrofit(
         val cod: Int,
         val base: String,
         val visibility: String,

@@ -3,7 +3,6 @@ package com.example.weather.data.repositories
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
 import com.example.core.data.WeatherRepository
-import com.example.weather.data.entities.CityWeather
 import com.example.weather.frameworks.WeatherApiDS
 
 class WeatherRepositoryImpl : WeatherRepository {

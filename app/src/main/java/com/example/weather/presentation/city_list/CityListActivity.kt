@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.business.CityListView
-import com.example.weather.data.entities.CityWeather
-import com.example.weather.data.entities.CityWeatherParcelable
+import com.example.weather.data.entities.json.CityWeatherRetrofit
+import com.example.weather.data.entities.parcelable.CityWeatherParcelable
 import com.example.weather.data.entities.parcelable.CoordinateParcelable
 import com.example.weather.presentation.first_city.FirstCityActivity
 
@@ -38,7 +38,7 @@ class CityListActivity :
         initViewItems()
     }
 
-    override fun initRV(citiesWeather: ArrayList<CityWeather>?) {
+    override fun initRV(citiesWeatherRetrofit: ArrayList<CityWeatherRetrofit>?) {
         TODO("Not yet implemented")
     }
 

@@ -11,8 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.weather.R
 import com.example.weather.business.FirstCityView
-import com.example.weather.data.entities.CityWeatherParcelable
-import com.example.weather.data.entities.parcelable.WeatherParcelable
+import com.example.weather.data.entities.parcelable.CityWeatherParcelable
 import com.example.weather.presentation.city_list.CityListActivity
 
 class FirstCityActivity :
