@@ -59,12 +59,12 @@ data class CoordinateParcelable(
 
 
 data class MainWeatherDataParcelable(
-        val temp: Float,
-        val feels_like: Float,
-        val temp_min: Float,
-        val temp_max: Float,
-        val pressure: Float,
-        val humidity: Int
+    val temp: Float,
+    val feelsLike: Float,
+    val tempMin: Float,
+    val tempMax: Float,
+    val pressure: Float,
+    val humidity: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readFloat(),
@@ -77,9 +77,9 @@ data class MainWeatherDataParcelable(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeFloat(temp)
-        parcel.writeFloat(feels_like)
-        parcel.writeFloat(temp_min)
-        parcel.writeFloat(temp_max)
+        parcel.writeFloat(feelsLike)
+        parcel.writeFloat(tempMin)
+        parcel.writeFloat(tempMax)
         parcel.writeFloat(pressure)
         parcel.writeInt(humidity)
     }

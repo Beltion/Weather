@@ -51,6 +51,23 @@ class WeatherMapper {
             )
     )
 
+        fun cityWeatherParcelableToCityWeather(cityWeatherParcelable: CityWeatherParcelable)
+                = CityWeather(
+                cityWeatherParcelable.name ?: "",
+                cityWeatherParcelable.dt,
+                cityWeatherParcelable.weather[0].main ?: "",
+                cityWeatherParcelable.weather[0].description ?: "",
+                cityWeatherParcelable.weather[0].icon ?: "",
+                cityWeatherParcelable.coord?.lon ?: "",
+                cityWeatherParcelable.coord?.lat ?: "",
+                cityWeatherParcelable.main?.temp ?: 0.0f,
+                cityWeatherParcelable.main?.feelsLike ?: 0.0f,
+                cityWeatherParcelable.main?.pressure ?: 0.0f,
+                cityWeatherParcelable.main?.humidity ?: 0,
+                cityWeatherParcelable.wind?.speed ?: 0.0f,
+                cityWeatherParcelable.wind?.deg ?: 0,
+                cityWeatherParcelable.clouds?.all ?: 0
+        )
 
     fun weatherListToWeatherParcelableList(list: ArrayList<Weather>): ArrayList<WeatherParcelable> {
         val parcelables = ArrayList<WeatherParcelable>()
@@ -67,4 +84,5 @@ class WeatherMapper {
         }
         return parcelables
     }
+
 }
