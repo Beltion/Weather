@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.business.CityListView
 import com.example.weather.data.entities.json.CityWeatherRetrofit
-import com.example.weather.data.entities.parcelable.CityWeatherParcelable
-import com.example.weather.data.entities.parcelable.CoordinateParcelable
+import com.example.weather.data.entities.parcelable.CityParcelable
+import com.example.weather.frameworks.room.CityWeatherDAO
+import com.example.weather.frameworks.room.WeatherRoomDB
 import com.example.weather.presentation.first_city.FirstCityActivity
 
 class CityListActivity :
@@ -49,13 +50,9 @@ class CityListActivity :
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
     }
 
-    override fun getCityWeatherParcelable(): CityWeatherParcelable? {
-        return intent.extras?.getParcelable("firstCityWeather")
-    }
-
-    override fun startForecastActivity(coordinate: CoordinateParcelable) {
+    override fun startForecastActivity(coordinate: CityParcelable) {
         val intent = Intent(this, CityListActivity::class.java)
-        intent.putExtra("coor", coordinate)
+        intent.putExtra("coord", coordinate)
         startActivity(intent)
     }
 
@@ -64,6 +61,10 @@ class CityListActivity :
         startActivity(intent)
         finish()
     }
+
+    override fun getDataBaseDAO(): CityWeatherDAO
+        = WeatherRoomDB.getDatabase(this).cityWeatherDAO()
+
 
     override fun initViewItems() {
         progress = findViewById(R.id.progressbar)

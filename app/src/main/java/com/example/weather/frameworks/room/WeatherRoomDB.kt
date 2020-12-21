@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.core.business.entities.CityWeather
+import com.example.weather.frameworks.room.table.CityTableEntity
 
-@Database(entities = [CityWeather::class], version = 1, exportSchema = false)
-public abstract class WeatherRoomDB : RoomDatabase(){
+@Database(entities = [CityTableEntity::class], version = 1, exportSchema = false)
+abstract class WeatherRoomDB : RoomDatabase(){
 
     abstract fun cityWeatherDAO() : CityWeatherDAO
 

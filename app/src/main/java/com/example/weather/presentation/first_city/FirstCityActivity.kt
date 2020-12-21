@@ -11,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.weather.R
 import com.example.weather.business.FirstCityView
-import com.example.weather.data.entities.parcelable.CityWeatherParcelable
+import com.example.weather.frameworks.room.CityWeatherDAO
+import com.example.weather.frameworks.room.WeatherRoomDB
 import com.example.weather.presentation.city_list.CityListActivity
 
 class FirstCityActivity :
@@ -48,12 +49,14 @@ class FirstCityActivity :
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
     }
 
-    override fun startNewActivity(weatherParcelable: CityWeatherParcelable) {
+    override fun startNewActivity() {
         val intent = Intent(this, CityListActivity::class.java)
-        intent.putExtra("firstCityWeather", weatherParcelable)
         startActivity(intent)
         finish()
     }
+
+    override fun getDataBaseDAO(): CityWeatherDAO
+            = WeatherRoomDB.getDatabase(this).cityWeatherDAO()
 
     override fun initViewItems() {
         progress = findViewById(R.id.progressbar)

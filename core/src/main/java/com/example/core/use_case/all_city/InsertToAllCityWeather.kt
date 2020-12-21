@@ -12,7 +12,7 @@ class InsertToAllCityWeather(private val repository: AllCityWeatherRepository) {
         repository.insertCityWeatherToday(cityWeather,
             object : SuccessCallback{
                 override fun onSuccess(data: Any?) {
-                    successCallback.onSuccess(data) 
+                    successCallback.onSuccess(data)
                 }
 
             },
