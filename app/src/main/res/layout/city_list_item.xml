@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="name_city_list_item"
+                app:layout_constraintTop_toBottomOf="@+id/name_city_list_item"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="main_city_list_item"
+                app:layout_constraintTop_toBottomOf="@+id/main_city_list_item"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="desc_city_list_item"
+                app:layout_constraintTop_toBottomOf="@+id/desc_city_list_item"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="temp_city_list_item"
+                app:layout_constraintTop_toBottomOf="@+id/temp_city_list_item"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="feels_like_city_list_item"
+                app:layout_constraintTop_toBottomOf="@+id/feels_like_city_list_item"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="pressure_city_list_item"
+                app:layout_constraintTop_toBottomOf="@+id/pressure_city_list_item"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="humidity_city_list_item"
+                app:layout_constraintTop_toBottomOf="@+id/humidity_city_list_item"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="wind_speed_city_list_item"
+                app:layout_constraintTop_toBottomOf="@+id/wind_speed_city_list_item"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="wind_direction_city_list_item"
+                app:layout_constraintTop_toBottomOf="@+id/wind_direction_city_list_item"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>

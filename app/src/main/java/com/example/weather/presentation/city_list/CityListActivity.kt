@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.core.business.entities.CityWeather
 import com.example.weather.R
 import com.example.weather.business.CityListView
+import com.example.weather.business.adapters.CityListAdapter
 import com.example.weather.data.entities.json.CityWeatherRetrofit
 import com.example.weather.data.entities.parcelable.CityParcelable
 import com.example.weather.frameworks.room.CityWeatherDAO
@@ -19,7 +21,8 @@ import com.example.weather.presentation.first_city.FirstCityActivity
 
 class CityListActivity :
         AppCompatActivity(),
-        CityListView
+        CityListView,
+        CityListAdapter.OnCityListClickListener
 {
 
     private lateinit var rv: RecyclerView
@@ -39,8 +42,10 @@ class CityListActivity :
         initViewItems()
     }
 
-    override fun initRV(citiesWeatherRetrofit: ArrayList<CityWeatherRetrofit>?) {
-        TODO("Not yet implemented")
+    override fun initRV(citiesWeather: ArrayList<CityWeather>) {
+        rv.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+        val adapter = CityListAdapter(citiesWeather, this)
+        rv.adapter = adapter
     }
 
     override fun getStringFromID(stringID: Int): String
@@ -87,5 +92,13 @@ class CityListActivity :
     override fun hideContent() {
         container.visibility = View.INVISIBLE
         progress.visibility = View.VISIBLE
+    }
+
+    override fun onClick(cityWeather: CityWeather) {
+        presenter.onItemClick(cityWeather)
+    }
+
+    override fun onLongClick(cityWeather: CityWeather) {
+        presenter.onItemLongClick(cityWeather)
     }
 }

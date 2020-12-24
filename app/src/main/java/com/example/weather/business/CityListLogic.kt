@@ -2,7 +2,7 @@ package com.example.weather.business
 
 import com.example.core.business.BasePresenter
 import com.example.core.business.BaseView
-import com.example.weather.data.entities.json.CityWeatherRetrofit
+import com.example.core.business.entities.CityWeather
 import com.example.weather.data.entities.parcelable.CityParcelable
 import com.example.weather.frameworks.room.CityWeatherDAO
 
@@ -10,12 +10,12 @@ import com.example.weather.frameworks.room.CityWeatherDAO
 
 interface CityListPresenter : BasePresenter {
     fun initView(v: CityListView)
-    fun onItemClick(cityTitle: String)
-    fun onItemLongClick()
+    fun onItemClick(cityTitle: CityWeather)
+    fun onItemLongClick(cityWeather: CityWeather)
 }
 
 interface CityListView : BaseView {
-    fun initRV(citiesWeatherRetrofit: ArrayList<CityWeatherRetrofit>?)
+    fun initRV(citiesWeather: ArrayList<CityWeather>)
     fun getStringFromID(stringID: Int) : String
     fun showToast(str: String)
     fun startForecastActivity(coordinate: CityParcelable)

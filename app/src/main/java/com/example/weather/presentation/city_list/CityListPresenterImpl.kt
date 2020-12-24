@@ -1,12 +1,12 @@
 package com.example.weather.presentation.city_list
 
-import android.nfc.Tag
 import android.util.Log
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
+import com.example.core.business.entities.CityWeather
 import com.example.weather.business.CityListPresenter
 import com.example.weather.business.CityListView
-import com.example.weather.data.mappers.WeatherMapper
+import com.example.weather.frameworks.room.table.CityTableEntity
 import java.lang.ref.WeakReference
 
 class CityListPresenterImpl : CityListPresenter {
@@ -19,11 +19,11 @@ class CityListPresenterImpl : CityListPresenter {
         view = WeakReference(v)
     }
 
-    override fun onItemClick(cityTitle: String) {
+    override fun onItemClick(cityTitle: CityWeather) {
         TODO("Not yet implemented")
     }
 
-    override fun onItemLongClick() {
+    override fun onItemLongClick(cityWeather: CityWeather) {
         TODO("Not yet implemented")
     }
 
@@ -34,6 +34,12 @@ class CityListPresenterImpl : CityListPresenter {
                 override fun onSuccess(data: Any?) {
                     if (data is ArrayList<*>){
                         Log.d(TAG, "City size: ${data.size}")
+                        if(data.size > 0 ){
+                            (data as ArrayList<CityTableEntity>).forEach {
+                                Log.d(TAG, "City name: ${it.cityName}")
+                            }
+                            view.showContent()
+                        }
                     }
                 }
             },  object : FailureCallback{
