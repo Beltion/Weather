@@ -59,6 +59,7 @@ class CityListAdapter(
         cityWeatherList[position].let{cityWeather ->
             holder.name.text = cityWeather.cityName
             holder.main.text = cityWeather.main
+            holder.desc.text = cityWeather.desc
             holder.temp.text = cityWeather.temp.toString()
             holder.feelsLike.text = cityWeather.feelsLike.toString()
             holder.pressure.text = cityWeather.pressure.toString()

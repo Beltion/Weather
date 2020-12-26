@@ -7,6 +7,10 @@ import com.example.core.business.entities.CityWeather
 import com.example.weather.business.CityListPresenter
 import com.example.weather.business.CityListView
 import com.example.weather.frameworks.room.table.CityTableEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 
 class CityListPresenterImpl : CityListPresenter {
@@ -34,13 +38,28 @@ class CityListPresenterImpl : CityListPresenter {
                 override fun onSuccess(data: Any?) {
                     if (data is ArrayList<*>){
                         Log.d(TAG, "City size: ${data.size}")
-                        if(data.size > 0 ){
-                            (data as ArrayList<CityTableEntity>).forEach {
-                                Log.d(TAG, "City name: ${it.cityName}")
-                            }
-                            view.showContent()
+                        for (city in data as ArrayList<CityTableEntity>){
+                            Log.d(TAG, "City: ${city.cityName}")
                         }
-                    }
+                            if(data.size > 0 ){
+                                Log.d(TAG, "City size before call getAllCitiesTodayWeather: ${data.size}")
+                                val weathers = ArrayList<CityWeather>()
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    weathers.addAll(
+                                             async {
+                                                 model.getAllCitiesTodayWeather(data)
+                                             }.await()
+                                    )
+                                    Log.d(TAG, "City size: ${weathers.size}")
+                                    view.initRV(weathers)
+                                    view.showContent()
+                                }
+
+                            } else {
+                                view.startFirstCityActivity()
+                            }
+                        }
+
                 }
             },  object : FailureCallback{
                 override fun onFailure(tag: String, error: Any?) {

@@ -20,4 +20,4 @@ data class CityWeatherRetrofit(
         val rain: Rain?, //   <- have SerializedName annotation
         val clouds: Clouds,
         val sys: SystemCityData
-)
+) : CityWeatherToday

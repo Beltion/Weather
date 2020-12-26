@@ -2,16 +2,39 @@ package com.example.weather.data.repositories
 
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
+import com.example.core.business.entities.CityWeatherToday
 import com.example.core.data.city.CityWeatherRepository
+import com.example.weather.data.entities.json.CityWeatherErrorBody
 import com.example.weather.data.entities.json.CityWeatherRetrofit
 import com.example.weather.data.mappers.WeatherMapper
 import com.example.weather.frameworks.CityWeatherApiDS
+import kotlinx.coroutines.*
 
 class CityWeatherRepositoryApi :
     CityWeatherRepository {
 
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(Dispatchers.IO + job)
+
     private val TAG = CityWeatherRepositoryApi::class.simpleName
     private val apiDS = CityWeatherApiDS()
+
+
+    override suspend fun getWeatherToday(city: String): CityWeatherToday? {
+        GlobalScope.async(scope.coroutineContext){
+            val cityWeatherToday = async { apiDS.getWeatherToday(city) }.await()
+            when(cityWeatherToday){
+                is CityWeatherRetrofit -> {
+                    return@async WeatherMapper.cityWeatherRetrofitToCityWeather(cityWeatherToday)
+                }
+                is CityWeatherErrorBody -> {
+                    return@async cityWeatherToday
+                }
+                else -> return@async null
+            }
+        }
+        return null
+    }
 
     override suspend fun getWeatherToday(
         city: String,
@@ -54,6 +77,7 @@ class CityWeatherRepositoryApi :
             failureCallback.onFailure("$TAG -> ", e)
         }
     }
+
 
     override suspend fun getWeatherForWeek(
         successCallback: SuccessCallback,

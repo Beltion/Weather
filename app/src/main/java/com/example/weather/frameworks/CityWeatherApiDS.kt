@@ -1,11 +1,14 @@
 package com.example.weather.frameworks
 
+import android.util.Log
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
-import com.example.core.business.entities.WeatherErrorBody
+import com.example.core.business.entities.CityWeatherToday
+import com.example.weather.data.entities.json.CityWeatherErrorBody
 import com.example.weather.data.entities.json.CityWeatherRetrofit
 import com.example.core.data.city.CityWeatherDataSource
 import com.google.gson.Gson
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,7 +20,34 @@ import retrofit2.http.Query
 //  Get weather from api and check status code
 class CityWeatherApiDS : CityWeatherDataSource {
 
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(Dispatchers.Main + job)
     private val TAG = CityWeatherApiDS::class.simpleName
+
+    override suspend fun getWeatherToday(city: String): CityWeatherToday? {
+        var cityWeather: CityWeatherRetrofit? = null
+        GlobalScope.async(scope.coroutineContext){
+            val response: Response<CityWeatherRetrofit> = async {
+                Common.retrofitService.getOneDayWeatherCo(city)
+            }.await()
+            if(response.isSuccessful && response.body() != null){
+                Log.d(TAG, "Response: ${response.body()}")
+                cityWeather = response.body()!!
+                return@async cityWeather
+            } else {
+                try {
+                    return@async Gson().fromJson(
+                            response.errorBody()!!.string(),
+                            CityWeatherErrorBody::class.java)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    return@async null
+                }
+            }
+        }
+
+        return cityWeather
+    }
 
     override suspend fun getWeatherToday(
         city: String,
@@ -37,10 +67,10 @@ class CityWeatherApiDS : CityWeatherDataSource {
                         successCallback.onSuccess(response.body())
                     } else {
                         try {
-                            val error: WeatherErrorBody =
+                            val error: CityWeatherErrorBody =
                                     Gson().fromJson(
                                             response.errorBody()!!.string(),
-                                            WeatherErrorBody::class.java)
+                                            CityWeatherErrorBody::class.java)
                             failureCallback.onFailure("$TAG errorBody-> ", error)
                         } catch (e: Exception) {
                             e.printStackTrace()
@@ -77,6 +107,13 @@ class CityWeatherApiDS : CityWeatherDataSource {
             @Query("lang") lang: String = "ru",
             @Query("appid") key: String = "51d4575d9c8e6d6decb5854c1db07ec7"
         ) : Call<CityWeatherRetrofit>
+
+        @GET("weather?")
+        suspend fun getOneDayWeatherCo(
+                @Query("q") city: String,
+                @Query("lang") lang: String = "ru",
+                @Query("appid") key: String = "51d4575d9c8e6d6decb5854c1db07ec7"
+        ) : Response<CityWeatherRetrofit>
 
         @GET("onecall/timemachine?")
         fun getFiveDayWeather(
