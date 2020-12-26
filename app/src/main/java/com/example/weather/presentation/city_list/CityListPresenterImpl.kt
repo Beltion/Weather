@@ -23,12 +23,12 @@ class CityListPresenterImpl : CityListPresenter {
         view = WeakReference(v)
     }
 
-    override fun onItemClick(cityTitle: CityWeather) {
-        TODO("Not yet implemented")
+    override fun onItemClick(cityWeather: CityWeather) {
+        Log.d(TAG, "click on -> ${cityWeather.cityName}")
     }
 
     override fun onItemLongClick(cityWeather: CityWeather) {
-        TODO("Not yet implemented")
+        Log.d(TAG, "long click on -> ${cityWeather.cityName}")
     }
 
     override fun onViewCreated() {

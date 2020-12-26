@@ -67,7 +67,19 @@ class CityListAdapter(
             holder.windSpeed.text = cityWeather.windSpeed.toString()
             holder.windDirection.text = cityWeather.windDirection.toString()
             holder.clouds.text = cityWeather.clouds.toString()
+
+            holder.onClick(
+                    cityWeather,
+                    clickListener
+            )
+
+            holder.onLongClick(
+                    cityWeather,
+                    clickListener
+            )
         }
+
+
 
     }
 
