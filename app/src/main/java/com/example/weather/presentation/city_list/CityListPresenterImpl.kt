@@ -25,6 +25,7 @@ class CityListPresenterImpl : CityListPresenter {
 
     override fun onItemClick(cityWeather: CityWeather) {
         Log.d(TAG, "click on -> ${cityWeather.cityName}")
+        view?.get()?.startForecastActivity()
     }
 
     override fun onItemLongClick(cityWeather: CityWeather) {

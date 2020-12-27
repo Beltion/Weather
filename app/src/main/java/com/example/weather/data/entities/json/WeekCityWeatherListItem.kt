@@ -8,7 +8,7 @@ import com.example.core.business.entities.Wind
 data class WeekCityWeatherListItem(
         val dt: Int,
         val main: MainWeatherData,
-        val weather: Weather,
+        val weather: ArrayList<Weather>,
         val clouds: Clouds,
         val wind: Wind,
         val rain: Rain?,

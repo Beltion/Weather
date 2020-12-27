@@ -14,10 +14,10 @@ class WeekCityWeatherApiDS: WeekCityDataSource {
     private val TAG = WeekCityWeatherApiDS::class.simpleName
     private val job = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.IO + job)
-    private val apiDS = WeekCityWeatherApiDS()
 
     override suspend fun getWeekWeather(city: String): WeekCityWeatherClassInterface?
             = GlobalScope.async(scope.coroutineContext) {
+            Log.d(TAG, "Start Coroutine: $coroutineContext")
             var weekCityWeatherRetrofit: WeekCityWeatherRetrofit? = null
 
             val job = async {
@@ -41,7 +41,6 @@ class WeekCityWeatherApiDS: WeekCityDataSource {
                     return@async null
                 }
             }
-        }.await() as WeekCityWeatherClassInterface?
+        }.await()
 
-    }
 }

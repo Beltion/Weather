@@ -12,6 +12,7 @@ import com.example.weather.data.mappers.WeatherMapper
 import com.example.weather.data.repositories.AllCityWeatherRepositoryRoom
 import com.example.weather.data.repositories.CityWeatherRepositoryApi
 import com.example.weather.frameworks.CityWeatherApiDS
+import com.example.weather.frameworks.Common
 import com.example.weather.frameworks.room.CityWeatherDAO
 import com.example.weather.frameworks.room.table.CityTableEntity
 import kotlinx.coroutines.*
@@ -74,7 +75,7 @@ import retrofit2.awaitResponse
                 var cityWeather: CityWeather? = null
                 Log.d(TAG, "Before get ${city.cityName}")
                 val response: Response<CityWeatherRetrofit> = async {
-                    CityWeatherApiDS.Common.retrofitService.getOneDayWeatherCo(city.cityName)
+                    Common.retrofitService.getOneDayWeatherCo(city.cityName)
                 }.await()
                 if(response.isSuccessful && response.body() != null){
                     Log.d(TAG, "Response: ${response.body()}")

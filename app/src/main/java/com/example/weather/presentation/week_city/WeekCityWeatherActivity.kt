@@ -9,10 +9,15 @@ class WeekCityWeatherActivity :
         AppCompatActivity(),
         WeekCityView {
 
+    lateinit var presenter: WeekCityWeatherPresenter
 
+    override fun onStart() {
+        super.onStart()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initLogicItems()
     }
 
     override fun getStringFromID(stringID: Int): String {
@@ -32,7 +37,9 @@ class WeekCityWeatherActivity :
     }
 
     override fun initLogicItems() {
-        TODO("Not yet implemented")
+        presenter = WeekCityWeatherPresenter()
+        presenter.initView(this)
+        presenter.onViewCreated()
     }
 
     override fun showContent() {

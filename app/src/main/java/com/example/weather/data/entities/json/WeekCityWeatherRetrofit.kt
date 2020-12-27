@@ -5,6 +5,6 @@ import com.example.core.business.entities.WeekCityWeatherClassInterface
 
 data class WeekCityWeatherRetrofit(
         val cod: Int,
-        val cty: City,
+        val city: City,
         val list: ArrayList<WeekCityWeatherListItem>
 ) : WeekCityWeatherClassInterface

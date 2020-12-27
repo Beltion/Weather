@@ -17,6 +17,7 @@ import com.example.weather.data.entities.parcelable.CityParcelable
 import com.example.weather.frameworks.room.CityWeatherDAO
 import com.example.weather.frameworks.room.WeatherRoomDB
 import com.example.weather.presentation.first_city.FirstCityActivity
+import com.example.weather.presentation.week_city.WeekCityWeatherActivity
 
 class CityListActivity :
         AppCompatActivity(),
@@ -54,9 +55,8 @@ class CityListActivity :
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
     }
 
-    override fun startForecastActivity(coordinate: CityParcelable) {
-        val intent = Intent(this, CityListActivity::class.java)
-        intent.putExtra("coord", coordinate)
+    override fun startForecastActivity() {
+        val intent = Intent(this, WeekCityWeatherActivity::class.java)
         startActivity(intent)
     }
 

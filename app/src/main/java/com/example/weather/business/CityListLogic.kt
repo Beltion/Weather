@@ -18,7 +18,7 @@ interface CityListView : BaseView {
     fun initRV(citiesWeather: ArrayList<CityWeather>)
     fun getStringFromID(stringID: Int) : String
     fun showToast(str: String)
-    fun startForecastActivity(coordinate: CityParcelable)
+    fun startForecastActivity()
     fun startFirstCityActivity()
     fun getDataBaseDAO() : CityWeatherDAO
 }
