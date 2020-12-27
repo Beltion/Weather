@@ -11,6 +11,9 @@ data class Coordinate(
         val lat: String
 )
 
+data class City(
+        val name: String
+)
 
 data class MainWeatherData(
         val temp: Float,
