@@ -13,7 +13,6 @@ import com.example.core.business.entities.CityWeather
 import com.example.weather.R
 import com.example.weather.business.CityListView
 import com.example.weather.business.adapters.CityListAdapter
-import com.example.weather.data.entities.json.CityWeatherRetrofit
 import com.example.weather.data.entities.parcelable.CityParcelable
 import com.example.weather.frameworks.room.CityWeatherDAO
 import com.example.weather.frameworks.room.WeatherRoomDB
