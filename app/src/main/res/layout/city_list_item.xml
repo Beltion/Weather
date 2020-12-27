@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -14,99 +14,73 @@
         android:elevation="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/name_city_list_item"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textSize="30sp"/>
 
             <TextView
-                android:id="@+id/main_city_list_item"
-                android:layout_width="match_parent"
+                android:id="@+id/temp_city_list_item"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/name_city_list_item"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                android:padding="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/name_city_list_item"
+                android:textSize="30sp"/>
 
             <TextView
                 android:id="@+id/desc_city_list_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/main_city_list_item"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/name_city_list_item"
+                app:layout_constraintRight_toRightOf="parent"/>
 
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-
-            <TextView
-                android:id="@+id/temp_city_list_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
+            <ImageView
+                android:id="@+id/img_city_list_item"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 app:layout_constraintTop_toBottomOf="@+id/desc_city_list_item"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-
-            <TextView
-                android:id="@+id/feels_like_city_list_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/temp_city_list_item"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
             <TextView
                 android:id="@+id/pressure_city_list_item"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/feels_like_city_list_item"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                android:padding="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/desc_city_list_item"
+                app:layout_constraintLeft_toRightOf="@+id/img_city_list_item"/>
 
             <TextView
                 android:id="@+id/humidity_city_list_item"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/pressure_city_list_item"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintLeft_toRightOf="@+id/img_city_list_item"/>
 
             <TextView
                 android:id="@+id/wind_speed_city_list_item"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="5dp"
                 app:layout_constraintTop_toBottomOf="@+id/humidity_city_list_item"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
-
-            <TextView
-                android:id="@+id/wind_direction_city_list_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/wind_speed_city_list_item"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                app:layout_constraintLeft_toRightOf="@+id/img_city_list_item"/>
 
             <TextView
                 android:id="@+id/clouds_city_list_item"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/wind_direction_city_list_item"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                android:padding="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/wind_speed_city_list_item"
+                app:layout_constraintLeft_toRightOf="@+id/img_city_list_item"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
