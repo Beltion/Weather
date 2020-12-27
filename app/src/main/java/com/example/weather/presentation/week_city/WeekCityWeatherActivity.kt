@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.business.WeekCityView
 import com.example.weather.business.adapters.DayListAdapter
+import com.example.weather.business.adapters.ThreeHourListAdapter
 import com.example.weather.data.entities.ThreeHourAtDay
 
 class WeekCityWeatherActivity :
@@ -52,6 +53,7 @@ class WeekCityWeatherActivity :
 
     override fun initDayHoursRV(daysAtHours: ArrayList<ThreeHourAtDay>) {
         rvDayAtHours.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+        rvDayAtHours.adapter = ThreeHourListAdapter(daysAtHours)
     }
 
     override fun setCityName(name: String) {

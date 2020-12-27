@@ -31,6 +31,7 @@ class WeekCityWeatherPresenter : WeekCityPresenter {
                 dayAtHour.addAll(dayOfWeek.weatherThreeHourEaches)
             }
         }
+        Log.d(TAG, "Day at hour: $dayAtHour")
         view?.get()?.initDayHoursRV(dayAtHour)
     }
 

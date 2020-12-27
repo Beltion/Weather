@@ -26,13 +26,16 @@
             android:id="@+id/days_list_week_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/city_name_week_list"/>
+            app:layout_constraintTop_toBottomOf="@id/city_name_week_list"
+            android:layout_marginBottom="10dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/day_hours_list_week_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/days_list_week_list"/>
+            app:layout_constraintTop_toBottomOf="@id/days_list_week_list"
+            android:paddingBottom="150dp"
+            android:layout_marginTop="20dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/progressbar"/>
