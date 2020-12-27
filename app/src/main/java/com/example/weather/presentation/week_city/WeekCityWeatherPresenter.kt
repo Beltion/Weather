@@ -3,6 +3,7 @@ package com.example.weather.presentation.week_city
 import android.util.Log
 import com.example.weather.business.WeekCityPresenter
 import com.example.weather.business.WeekCityView
+import com.example.weather.data.entities.ThreeHourAtDay
 import com.example.weather.data.entities.json.WeekCityWeatherRetrofit
 import com.example.weather.data.mappers.WeatherMapper
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,13 @@ class WeekCityWeatherPresenter : WeekCityPresenter {
 
     override fun onDayClick(day: Int) {
         Log.d(TAG, "Click on day: $day")
+        val dayAtHour = ArrayList<ThreeHourAtDay>()
+        for(dayOfWeek in model.days){
+            if (dayOfWeek.dateDay == day){
+                dayAtHour.addAll(dayOfWeek.weatherThreeHourEaches)
+            }
+        }
+        view?.get()?.initDayHoursRV(dayAtHour)
     }
 
     override fun onViewCreated() {
