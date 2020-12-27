@@ -1,23 +1,25 @@
 package com.example.weather.frameworks
 
 import android.util.Log
-import com.example.core.business.entities.WeekCityWeather
+import com.example.core.business.entities.WeekCityWeatherClassInterface
 import com.example.core.data.week_city.WeekCityDataSource
 import com.example.weather.data.entities.json.CityWeatherErrorBody
 import com.example.weather.data.entities.json.WeekCityWeatherRetrofit
 import com.google.gson.Gson
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
 import retrofit2.Response
 
 class WeekCityWeatherApiDS: WeekCityDataSource {
 
     private val TAG = WeekCityWeatherApiDS::class.simpleName
+    private val job = SupervisorJob()
+    private val scope = CoroutineScope(Dispatchers.IO + job)
+    private val apiDS = WeekCityWeatherApiDS()
 
-    override suspend fun getWeekWeather(city: String): WeekCityWeather? {
-        var weekCityWeatherRetrofit: WeekCityWeatherRetrofit? = null
+    override suspend fun getWeekWeather(city: String): WeekCityWeatherClassInterface?
+            = GlobalScope.async(scope.coroutineContext) {
+            var weekCityWeatherRetrofit: WeekCityWeatherRetrofit? = null
 
-        coroutineScope {
             val job = async {
                 Common.retrofitService.getWeekWeatherCo(city)
             }
@@ -27,20 +29,19 @@ class WeekCityWeatherApiDS: WeekCityDataSource {
             if (response.isSuccessful && response.body() != null){
                 Log.d(TAG, "Response: ${response.body()}")
                 weekCityWeatherRetrofit = response.body()
-                return@coroutineScope weekCityWeatherRetrofit
+                return@async weekCityWeatherRetrofit
             } else {
                 try {
-                    return@coroutineScope Gson().fromJson(
+                    return@async Gson().fromJson(
                             response.errorBody().toString(),
                             CityWeatherErrorBody::class.java
                     )
                 } catch (e: Exception){
                     e.printStackTrace()
-                    return@coroutineScope null
+                    return@async null
                 }
             }
-        }
+        }.await() as WeekCityWeatherClassInterface?
 
-        return weekCityWeatherRetrofit
     }
 }

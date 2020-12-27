@@ -18,4 +18,4 @@ data class CityWeather(
     val windSpeed: Float,// Wind speed. Unit Default: meter/sec
     val windDirection: Int,// Wind direction, degrees (meteorological)
     val clouds: Int// Cloudiness, %
-) : CityWeatherToday
+) : CityWeatherClassInterface

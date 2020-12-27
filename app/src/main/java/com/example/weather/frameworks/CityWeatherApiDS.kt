@@ -3,7 +3,7 @@ package com.example.weather.frameworks
 import android.util.Log
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
-import com.example.core.business.entities.CityWeatherToday
+import com.example.core.business.entities.CityWeatherClassInterface
 import com.example.weather.data.entities.json.CityWeatherErrorBody
 import com.example.weather.data.entities.json.CityWeatherRetrofit
 import com.example.core.data.city.CityWeatherDataSource
@@ -12,10 +12,6 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
 
 //  Get weather from api and check status code
 class CityWeatherApiDS : CityWeatherDataSource {
@@ -24,7 +20,7 @@ class CityWeatherApiDS : CityWeatherDataSource {
     private val scope = CoroutineScope(Dispatchers.Main + job)
     private val TAG = CityWeatherApiDS::class.simpleName
 
-    override suspend fun getWeatherToday(city: String): CityWeatherToday? {
+    override suspend fun getWeatherToday(city: String): CityWeatherClassInterface? {
         var cityWeather: CityWeatherRetrofit? = null
         GlobalScope.async(scope.coroutineContext){
             val response: Response<CityWeatherRetrofit> = async {

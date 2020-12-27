@@ -3,7 +3,6 @@ package com.example.weather.frameworks.room.table
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.core.business.entities.CityWeatherToday
 import org.jetbrains.annotations.NotNull
 
 

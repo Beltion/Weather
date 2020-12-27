@@ -2,7 +2,7 @@ package com.example.weather.data.repositories
 
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
-import com.example.core.business.entities.CityWeatherToday
+import com.example.core.business.entities.CityWeatherClassInterface
 import com.example.core.data.city.CityWeatherRepository
 import com.example.weather.data.entities.json.CityWeatherErrorBody
 import com.example.weather.data.entities.json.CityWeatherRetrofit
@@ -20,7 +20,7 @@ class CityWeatherRepositoryApi :
     private val apiDS = CityWeatherApiDS()
 
 
-    override suspend fun getWeatherToday(city: String): CityWeatherToday? {
+    override suspend fun getWeatherToday(city: String): CityWeatherClassInterface? {
         GlobalScope.async(scope.coroutineContext){
             val cityWeatherToday = async { apiDS.getWeatherToday(city) }.await()
             when(cityWeatherToday){
