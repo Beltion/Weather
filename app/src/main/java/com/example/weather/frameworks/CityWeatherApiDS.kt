@@ -100,50 +100,7 @@ class CityWeatherApiDS : CityWeatherDataSource {
         }
     }
 
-    interface WeatherApi {
-        @GET("weather?")
-        fun getOneDayWeather(
-            @Query("q") city: String,
-            @Query("lang") lang: String = "ru",
-            @Query("appid") key: String = "51d4575d9c8e6d6decb5854c1db07ec7"
-        ) : Call<CityWeatherRetrofit>
 
-        @GET("weather?")
-        suspend fun getOneDayWeatherCo(
-                @Query("q") city: String,
-                @Query("lang") lang: String = "ru",
-                @Query("appid") key: String = "51d4575d9c8e6d6decb5854c1db07ec7"
-        ) : Response<CityWeatherRetrofit>
-
-        @GET("onecall/timemachine?")
-        fun getFiveDayWeather(
-            @Query("lat") lat: String,
-            @Query("lon") lon: String,
-            @Query("dt") dt: String,
-            @Query("lang") lang: String = "ru",
-            @Query("appid") key: String = "51d4575d9c8e6d6decb5854c1db07ec7"
-        ) : Call<CityWeatherRetrofit>
-    }
-
-    object RetrofitClient {
-        private var retrofit: Retrofit? = null
-        fun getRetrofitClient(baseUrl: String): Retrofit {
-            if (retrofit == null) {
-                retrofit = Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-            }
-            return retrofit!!
-        }
-    }
-
-    object Common {
-        private val BASE_URL = "https://api.openweathermap.org/data/2.5/"
-        val retrofitService: WeatherApi
-            get() = RetrofitClient.getRetrofitClient(BASE_URL).create(WeatherApi::class.java)
-
-    }
 
 }
 
