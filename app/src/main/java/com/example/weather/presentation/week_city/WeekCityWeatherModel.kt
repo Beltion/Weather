@@ -2,6 +2,7 @@ package com.example.weather.presentation.week_city
 
 import android.util.Log
 import com.example.core.use_case.city.GetCityWeatherWeek
+import com.example.weather.data.entities.DayOfWeek
 import com.example.weather.data.entities.json.WeekCityWeatherRetrofit
 import com.example.weather.data.repositories.WeekCityWeatherRepositoryApi
 import com.example.weather.frameworks.Common
@@ -14,6 +15,8 @@ class WeekCityWeatherModel {
     private val job = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.IO + job)
     private val TAG = WeekCityWeatherModel::class.simpleName
+
+    var days = ArrayList<DayOfWeek>()
 
     suspend fun getWeekWeather(city: String = "Ростов") : WeekCityWeatherRetrofit? {
         var weekCityWeatherRetrofit: WeekCityWeatherRetrofit? = null
@@ -32,6 +35,18 @@ class WeekCityWeatherModel {
         }.await()
 
         return weekCityWeatherRetrofit
+    }
+
+    fun getDays(week: ArrayList<DayOfWeek>): ArrayList<Int> {
+        val days = ArrayList<Int>()
+
+        for (day in week){
+            days.add(
+                    day.dateDay
+            )
+        }
+
+        return days
     }
 
 }

@@ -5,6 +5,7 @@ import com.example.weather.business.WeekCityPresenter
 import com.example.weather.business.WeekCityView
 import com.example.weather.data.entities.json.WeekCityWeatherRetrofit
 import com.example.weather.data.mappers.WeatherMapper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -21,9 +22,13 @@ class WeekCityWeatherPresenter : WeekCityPresenter {
         view = WeakReference(v)
     }
 
+    override fun onDayClick(day: Int) {
+        Log.d(TAG, "Click on day: $day")
+    }
+
     override fun onViewCreated() {
         Log.d(TAG,"Before model.get")
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.Main) {
             val weekCityWeather: WeekCityWeatherRetrofit?
                     = async {
                 model.getWeekWeather()
@@ -32,14 +37,14 @@ class WeekCityWeatherPresenter : WeekCityPresenter {
             Log.d(TAG,"After model.get")
 
             if (weekCityWeather != null) {
-                        val days = WeatherMapper.cityWeekRetrofitToDayOfWeek(weekCityWeather)
-                Log.d(TAG,"Days: ${days.size}")
-                for (day in days){
-                    Log.d(TAG,"Day: ${day.dateDay}")
-                    for(threeAtDay in day.weatherThreeHourEaches){
-                        Log.d(TAG,"Time: ${threeAtDay.time}")
-                    }
+                model.days = WeatherMapper.cityWeekRetrofitToDayOfWeek(weekCityWeather)
+                Log.d(TAG,"Days: ${model.days.size}")
 
+                val intDays = model.getDays(model.days)
+                view?.get()?.let { view ->
+                    view.setCityName(weekCityWeather.city.name)
+                    view.initDaysRV(intDays)
+                    view.showContent()
                 }
             }
 
@@ -47,5 +52,4 @@ class WeekCityWeatherPresenter : WeekCityPresenter {
 
 
     }
-
 }
