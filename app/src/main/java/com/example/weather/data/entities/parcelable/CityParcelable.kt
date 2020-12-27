@@ -6,17 +6,13 @@ import android.os.Parcelable
 //  Used when user click on today city weather
 
 data class CityParcelable(
-        val lon: String?,
-        val lat: String?
+        val name: String?
 ): Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString()) {
+    constructor(parcel: Parcel) : this(parcel.readString()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(lon)
-        parcel.writeString(lat)
+        parcel.writeString(name)
     }
 
     override fun describeContents(): Int {
@@ -32,4 +28,5 @@ data class CityParcelable(
             return arrayOfNulls(size)
         }
     }
+
 }
