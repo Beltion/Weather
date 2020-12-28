@@ -7,7 +7,7 @@ import com.example.core.business.entities.Wind
 import com.example.weather.data.entities.json.Rain
 import com.example.weather.data.entities.json.Snow
 
-//  Weather data for five hours per day
+//  Weather data for three hours per day
 
 data class ThreeHourAtDay(
         val time: String,

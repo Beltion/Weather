@@ -18,7 +18,7 @@ class WeekCityWeatherModel {
 
     var days = ArrayList<DayOfWeek>()
 
-    suspend fun getWeekWeather(city: String = "Ростов") : WeekCityWeatherRetrofit? {
+    suspend fun getWeekWeather(city: String) : WeekCityWeatherRetrofit? {
         var weekCityWeatherRetrofit: WeekCityWeatherRetrofit? = null
         GlobalScope.async(scope.coroutineContext) {
 

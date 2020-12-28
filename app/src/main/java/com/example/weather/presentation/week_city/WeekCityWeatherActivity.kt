@@ -60,6 +60,11 @@ class WeekCityWeatherActivity :
         cityName.text = name
     }
 
+    override fun getParcelable(): String{
+        val city: String = intent.getStringExtra("city").toString()
+        return city
+    }
+
     override fun initViewItems() {
         container = findViewById(R.id.content_week_list)
         progressBar = findViewById(R.id.progressbar)

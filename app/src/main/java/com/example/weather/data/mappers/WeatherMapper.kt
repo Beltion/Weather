@@ -34,8 +34,9 @@ object WeatherMapper {
     )
 
     fun cityWeekRetrofitToDayOfWeek(weekCityWeatherRetrofit: WeekCityWeatherRetrofit): ArrayList<DayOfWeek>{
+
         val days = ArrayList<DayOfWeek>()
-        val at5HourList = ArrayList<ThreeHourAtDay>()
+        val atThreeHourList = ArrayList<ThreeHourAtDay>()
 
         var currentDayDate: Int = weekCityWeatherRetrofit.list[0].dt_txt.substring(8,10).toInt()
         var currentMonthDate: Int = weekCityWeatherRetrofit.list[0].dt_txt.substring(5,7).toInt()
@@ -53,10 +54,10 @@ object WeatherMapper {
                     snow = item.snow,
                     visibility = item.visibility
             )
-            at5HourList.add(threeHourAtDay)
-//            Log.d("MAPPER", "Three ThreeHourAtDay")
-//            Log.d("MAPPER", "$currentDayDate.$currentMonthDate $currentTimeDate")
-//            Log.d("MAPPER", "First: $threeHourAtDay")
+            atThreeHourList.add(threeHourAtDay)
+            Log.d("MAPPER", "Three ThreeHourAtDay")
+            Log.d("MAPPER", "$currentDayDate.$currentMonthDate $currentTimeDate")
+            Log.d("MAPPER", "First: $threeHourAtDay")
         }
 
         weekCityWeatherRetrofit.list.let { weatherList ->
@@ -74,33 +75,41 @@ object WeatherMapper {
                                 snow = item.snow,
                                 visibility = item.visibility
                         )
-//                        Log.d("MAPPER", "Next ThreeHourAtDay")
-//                        Log.d("MAPPER", "$currentDayDate.$currentMonthDate $currentTimeDate")
-//                        Log.d("MAPPER", "Next: $threeHourAtDay")
-                        at5HourList.add(threeHourAtDay)
+                        Log.d("MAPPER", "Next ThreeHourAtDay")
+                        Log.d("MAPPER", "$currentDayDate.$currentMonthDate $currentTimeDate")
+                        Log.d("MAPPER", "Next: $threeHourAtDay")
+                        atThreeHourList.add(threeHourAtDay)
                     }
                 } else {
                     val dayOfWeek = DayOfWeek(
                             dateDay =  currentDayDate,
                             dateMonth =  currentMonthDate,
-                            weatherThreeHourEaches = at5HourList
+                            weatherThreeHourEaches = atThreeHourList
                             )
                     days.add(dayOfWeek)
-                    at5HourList.clear()
+                    Log.d("MAPPER", "atThreeHourList:${atThreeHourList.size}")
+                    atThreeHourList.clear()
                     currentMonthDate = weatherList[i].dt_txt.substring(5,7).toInt()
                     currentDayDate = weatherList[i].dt_txt.substring(8,10).toInt()
                 }
             }
         }
-
+        Log.d("MAPPER", "atThreeHourList:${atThreeHourList.size}")
         val dayOfWeek = DayOfWeek(
                 dateDay =  currentDayDate,
                 dateMonth =  currentMonthDate,
-                weatherThreeHourEaches = at5HourList
+                weatherThreeHourEaches = atThreeHourList
         )
+
+        Log.d("MAPPER", "Next ThreeHourAtDay")
+        Log.d("MAPPER", "$currentDayDate.$currentMonthDate $currentTimeDate")
+        Log.d("MAPPER", "Next: $dayOfWeek")
         days.add(dayOfWeek)
 
-//        Log.d("MAPPER", "Days count: ${days.size}")
+        Log.d("MAPPER", "Days count: ${days.size}")
+        for(day in days){
+            Log.d("MAPPER", "day:${day.weatherThreeHourEaches.size}")
+        }
         return days
     }
 }

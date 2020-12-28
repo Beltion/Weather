@@ -17,4 +17,5 @@ interface WeekCityView : BaseView {
     fun initDaysRV(days: ArrayList<Int>)
     fun initDayHoursRV(daysAtHours: ArrayList<ThreeHourAtDay>)
     fun setCityName(name: String)
+    fun getParcelable(): String
 }

@@ -64,8 +64,9 @@ class CityListActivity :
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
     }
 
-    override fun startForecastActivity() {
+    override fun startForecastActivity(city: String) {
         val intent = Intent(this, WeekCityWeatherActivity::class.java)
+        intent.putExtra("city", city)
         startActivity(intent)
     }
 
