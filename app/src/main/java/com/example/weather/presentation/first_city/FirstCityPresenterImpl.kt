@@ -4,10 +4,8 @@ import android.util.Log
 import com.example.core.business.callbacks.FailureCallback
 import com.example.core.business.callbacks.SuccessCallback
 import com.example.core.business.entities.CityWeather
-import com.example.weather.data.entities.json.CityWeatherRetrofit
 import com.example.weather.business.FirstCityPresenter
 import com.example.weather.business.FirstCityView
-import com.example.weather.data.mappers.WeatherMapper
 import com.example.weather.frameworks.room.table.CityTableEntity
 import java.lang.ref.WeakReference
 
@@ -70,7 +68,33 @@ class FirstCityPresenterImpl : FirstCityPresenter {
     }
 
     override fun onViewCreated() {
-        view?.get()?.showContent()
+        view?.get()?.let{ view ->
+            val roomDS = view.getDataBaseDAO()
+            model.getAllCityWeather(roomDS, object : SuccessCallback{
+                override fun onSuccess(data: Any?) {
+                    if (data is ArrayList<*>){
+                        Log.d(TAG, "City size: ${data.size}")
+                        for (city in data as ArrayList<CityTableEntity>){
+                            Log.d(TAG, "City: ${city.cityName}")
+                        }
+                        if(data.size > 0 ){
+                            Log.d(TAG, "Show cancel btn")
+                            view.showCancelBtn()
+                            view.showContent()
+                        } else {
+                            view.showContent()
+                        }
+                    }
+                }
+            },  object : FailureCallback{
+                override fun onFailure(tag: String, error: Any?) {
+                    TODO("Not yet implemented")
+                }
+
+            }
+            )
+
+        }
 
     }
 }

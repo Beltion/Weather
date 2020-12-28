@@ -30,8 +30,18 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toBottomOf="@+id/city_et_first_city"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="Найти"/>
 
+        <Button
+            android:id="@+id/cancel_city_btn_first_city"
+            android:layout_width="300dp"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toBottomOf="@+id/get_city_btn_first_city"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="Отмена"
+            android:visibility="invisible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

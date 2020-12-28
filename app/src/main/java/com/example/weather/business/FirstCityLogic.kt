@@ -17,4 +17,5 @@ interface FirstCityView : BaseView {
     fun showToast(str: String)
     fun startNewActivity()
     fun getDataBaseDAO() : CityWeatherDAO
+    fun showCancelBtn()
 }

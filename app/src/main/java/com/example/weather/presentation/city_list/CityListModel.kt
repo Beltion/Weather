@@ -106,4 +106,18 @@ import retrofit2.awaitResponse
          Log.d(TAG, "return $citiesWeather")
          return citiesWeather
     }
+
+     suspend fun getCityTodayWeather(city: String): CityWeather? {
+         var cityWeather: CityWeather? = null
+         GlobalScope.async(scope.coroutineContext) {
+             val response: Response<CityWeatherRetrofit> = async {
+                 Common.retrofitService.getOneDayWeatherCo(city)
+             }.await()
+             if(response.isSuccessful && response.body() != null){
+                 Log.d(TAG, "Response: ${response.body()}")
+                 cityWeather = WeatherMapper.cityWeatherRetrofitToCityWeather(response.body()!!)
+             }
+         }
+         return cityWeather
+     }
 }

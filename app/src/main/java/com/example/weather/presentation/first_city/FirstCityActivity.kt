@@ -22,6 +22,7 @@ class FirstCityActivity :
 
     private lateinit var cityEt: EditText
     private lateinit var cityBtn: Button
+    private lateinit var cityBtnCancel: Button
     private lateinit var container: ConstraintLayout
     private lateinit var progress: ProgressBar
 
@@ -58,12 +59,17 @@ class FirstCityActivity :
     override fun getDataBaseDAO(): CityWeatherDAO
             = WeatherRoomDB.getDatabase(this).cityWeatherDAO()
 
+    override fun showCancelBtn() {
+        cityBtnCancel.visibility = View.VISIBLE
+    }
+
     override fun initViewItems() {
         progress = findViewById(R.id.progressbar)
         container = findViewById(R.id.content_first_city)
 
         cityEt = findViewById(R.id.city_et_first_city)
         cityBtn = findViewById(R.id.get_city_btn_first_city)
+        cityBtnCancel = findViewById(R.id.cancel_city_btn_first_city)
 
     }
 
@@ -74,6 +80,10 @@ class FirstCityActivity :
             presenter.onBtnClick(
                     cityEt.text.toString()
             )
+        }
+
+        cityBtnCancel.setOnClickListener {
+            finish()
         }
 
         presenter.onViewCreated()

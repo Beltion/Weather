@@ -1,12 +1,16 @@
 package com.example.weather.presentation.city_list
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.business.entities.CityWeather
@@ -18,6 +22,10 @@ import com.example.weather.frameworks.room.CityWeatherDAO
 import com.example.weather.frameworks.room.WeatherRoomDB
 import com.example.weather.presentation.first_city.FirstCityActivity
 import com.example.weather.presentation.week_city.WeekCityWeatherActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class CityListActivity :
         AppCompatActivity(),
@@ -28,6 +36,7 @@ class CityListActivity :
     private lateinit var rv: RecyclerView
     private lateinit var container: ConstraintLayout
     private lateinit var progress: ProgressBar
+    private lateinit var fab: FloatingActionButton
 
     private var presenter = CityListPresenterImpl()
 
@@ -63,7 +72,6 @@ class CityListActivity :
     override fun startFirstCityActivity() {
         val intent = Intent(this, FirstCityActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
     override fun getDataBaseDAO(): CityWeatherDAO
@@ -76,11 +84,17 @@ class CityListActivity :
 
         rv = findViewById(R.id.rv_cities_city_list)
         rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+
+        fab = findViewById(R.id.add_fab_city_list)
     }
 
     override fun initLogicItems() {
         presenter.initView(this)
         presenter.onViewCreated()
+
+        fab.setOnClickListener {
+            startFirstCityActivity()
+        }
     }
 
     override fun showContent() {
